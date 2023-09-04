@@ -45,14 +45,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConvertImageEngine.cs" />
-    <Compile Include="TraceHelper.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\ConvertImageSettings.cs" />
+    <Compile Include="Factory\ConvertImageSettingsFactory.cs" />
+    <Compile Include="Interfaces\Factory\IConvertImageSettingsFactory.cs" />
+    <Compile Include="Logger\ConsoleLogger.cs" />
+    <Compile Include="Interfaces\Engines\IConvertImageEngine.cs" />
+    <Compile Include="Models\ConvertImageConstants.cs" />
+    <Compile Include="Helpers\ConvertImageHelper.cs" />
+    <Compile Include="Engines\ConvertImageEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Interfaces\Factory\" />
+    <Folder Include="Factory\" />
+    <Folder Include="Logger\" />
+    <Folder Include="Interfaces\Engines\" />
+    <Folder Include="Engines\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

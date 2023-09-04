@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{80ADB860-2480-4E1D-9299-39A3EF6FB46F}|Default">
+  <MonoDevelop.Ide.ItemProperties.ConvertImage PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ConvertImage/Logger/ConsoleLogger.cs">
+    <Files>
+      <File FileName="ConvertImage/Program.cs" Line="31" Column="13" />
+      <File FileName="ConvertImage/ConvertImageEngine.cs" Line="26" Column="78" />
+      <File FileName="ConvertImage/Factory/ConvertImageSettingsFactory.cs" Line="23" Column="10" />
+      <File FileName="ConvertImage/Logger/ConsoleLogger.cs" Line="34" Column="6" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ConvertImage">
+            <Node name="ConvertImage" expanded="True">
+              <Node name="Factory" expanded="True" />
+              <Node name="Logger" expanded="True">
+                <Node name="ConsoleLogger.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>

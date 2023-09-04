@@ -1,27 +1,35 @@
 ﻿using System;
-
+using System.Threading.Tasks;
+using ConvertImage.Engines;
+using ConvertImage.Factory;
+using ConvertImage.Helpers;
+using ConvertImage.Interfaces.Engines;
+using ConvertImage.Interfaces.Factory;
+using ConvertImage.Logging;
+using static ConvertImage.Models.ConvertImageConstants;
 
 namespace ConvertImage
 {
     class Program
     {
-        static Settings settings;
+        private static readonly ILogger _logger = new ConsoleLogger();
+        private static readonly IConvertImageSettingsFactory _convertImageSettingsFactory = new ConvertImageSettingsFactory(_logger);
+        private static readonly IConvertImageEngine _convertImageEngine = new ConvertImageEngine(_logger);
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            settings = new Settings(args);
+            var settings = _convertImageSettingsFactory.CreateSettings(args);
 
-            try {
-                new ConvertImageEngine().ConvertImage(settings);
+            try
+            {
+                await _convertImageEngine.ConvertImagesAsync(settings);
             }
             catch(Exception ex)
             {
-                new TraceHelper().Error(ex.ToString());
+                _logger.Log(LogLevel.Error, ex.ToString());
             }
 
-            new TraceHelper().pressKeyToExit();
+            ConvertImageHelper.PressKeyToExit();
         }
-
-        
     }
 }
