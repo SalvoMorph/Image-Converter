@@ -1,5 +1,4 @@
-﻿using System;
-using ConvertImage.Models;
+﻿using ConvertImage.Models;
 
 namespace ConvertImage.Interfaces.Factory
 {
@@ -7,7 +6,7 @@ namespace ConvertImage.Interfaces.Factory
     /// The ConvertImageSettings Factory.
     /// </summary>
     internal interface IConvertImageSettingsFactory
-	{
+    {
         /// <summary>
         /// Create the settings.
         /// </summary>

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ConvertImage.Helpers;
+using System;
 using System.Text;
-using ConvertImage.Helpers;
 using static ConvertImage.Models.ConvertImageConstants;
 
 namespace ConvertImage.Logging
@@ -32,14 +32,14 @@ namespace ConvertImage.Logging
     /// <inheritdoc cref="ILogger"/>
     public class ConsoleLogger : ILogger
     {
-        private static readonly object lockObject = new();
-        private readonly ConsoleColor infoColor = ConsoleColor.DarkGreen;
-        private readonly ConsoleColor warningColor = ConsoleColor.Yellow;
-        private readonly ConsoleColor errorColor = ConsoleColor.Red;
+        private static readonly object _lockObject = new();
+        private readonly ConsoleColor _infoColor = ConsoleColor.DarkGreen;
+        private readonly ConsoleColor _warningColor = ConsoleColor.Yellow;
+        private readonly ConsoleColor _errorColor = ConsoleColor.Red;
 
         public void Log(LogLevel level, string message)
         {
-            lock (lockObject)
+            lock (_lockObject)
             {
                 Console.ForegroundColor = GetColorForLogLevel(level);
                 Console.WriteLine($"[{level}] {message}");
@@ -67,15 +67,15 @@ namespace ConvertImage.Logging
             Console.WriteLine(helpMenu);
         }
 
-        #region Provate Methods
+        #region Private Methods
 
         private ConsoleColor GetColorForLogLevel(LogLevel level)
         {
             return level switch
             {
-                LogLevel.Info => infoColor,
-                LogLevel.Warning => warningColor,
-                LogLevel.Error => errorColor,
+                LogLevel.Info => _infoColor,
+                LogLevel.Warning => _warningColor,
+                LogLevel.Error => _errorColor,
                 _ => ConsoleColor.White,
             };
         }

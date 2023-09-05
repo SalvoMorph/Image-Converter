@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ConvertImage.Interfaces.Engines;
+using ConvertImage.Logging;
+using ConvertImage.Models;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ConvertImage.Interfaces.Engines;
-using ConvertImage.Logging;
-using ConvertImage.Models;
 using static ConvertImage.Models.ConvertImageConstants;
 
 namespace ConvertImage.Engines
@@ -46,7 +46,7 @@ namespace ConvertImage.Engines
 
             var tasks = Directory.EnumerateFiles(settings.FilePath, settings.FileName)
             .Select(async file =>
-                {   
+                {
                     _logger.Log(LogLevel.Info, "Processing file " + file);
 
                     string newNameFile = string.IsNullOrEmpty(settings.DestinationPath)
@@ -90,13 +90,7 @@ namespace ConvertImage.Engines
 
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
 
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.FormatID == format.Guid)
-                    return codec;
-            }
-
-            return null;
+            return codecs.FirstOrDefault(codec => codec.FormatID == format.Guid);
         }
 
     }

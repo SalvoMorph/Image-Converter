@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
-using ConvertImage.Models;
+﻿using ConvertImage.Models;
+using System.Threading.Tasks;
 
 namespace ConvertImage.Interfaces.Engines
 {
-	/// <summary>
-	/// The ConvertImage Engine.
-	/// </summary>
-	public interface IConvertImageEngine
-	{
+    /// <summary>
+    /// The ConvertImage Engine.
+    /// </summary>
+    public interface IConvertImageEngine
+    {
         /// <summary>
         /// Convert the images.
         /// </summary>

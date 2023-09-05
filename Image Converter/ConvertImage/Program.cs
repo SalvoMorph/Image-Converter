@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using ConvertImage.Engines;
+﻿using ConvertImage.Engines;
 using ConvertImage.Factory;
 using ConvertImage.Helpers;
 using ConvertImage.Interfaces.Engines;
 using ConvertImage.Interfaces.Factory;
 using ConvertImage.Logging;
+using System;
+using System.Threading.Tasks;
 using static ConvertImage.Models.ConvertImageConstants;
 
 namespace ConvertImage
@@ -24,7 +24,7 @@ namespace ConvertImage
             {
                 await _convertImageEngine.ConvertImagesAsync(settings);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, ex.ToString());
             }

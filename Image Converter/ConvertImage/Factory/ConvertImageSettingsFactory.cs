@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using ConvertImage.Interfaces.Factory;
+﻿using ConvertImage.Interfaces.Factory;
 using ConvertImage.Logging;
 using ConvertImage.Models;
+using System;
+using System.Collections.Generic;
 using static ConvertImage.Models.ConvertImageConstants;
 
 namespace ConvertImage.Factory
@@ -37,7 +37,7 @@ namespace ConvertImage.Factory
             {
                 var split = option.Split('=');
 
-                if (split[0].ToUpper().Contains("HELP"))
+                if (split[0].ToUpper().Contains(CmdLineParams.Help))
                 {
                     _logger.ShowHelpMenu();
                     Environment.Exit(0);
@@ -50,16 +50,18 @@ namespace ConvertImage.Factory
             return InitSettings(parserSettings);
         }
 
+        #region Private Methods
+
         private ConvertImageSettings InitSettings(Dictionary<string, string> parserSettings)
         {
-            if (!parserSettings.ContainsKey("-file"))
-                _logger.ShowMandatoryParameterError("-file");
+            if (!parserSettings.ContainsKey(CmdLineParams.FileName))
+                _logger.ShowMandatoryParameterError(CmdLineParams.FileName);
 
-            var settings = new ConvertImageSettings(filePath: GetFilePath(parserSettings), fileName: parserSettings["-file"])
+            var settings = new ConvertImageSettings(filePath: GetFilePath(parserSettings), fileName: parserSettings[CmdLineParams.FileName])
             {
-                ConvertInto = parserSettings.ContainsKey("-to") ? parserSettings["-to"] : ".jpeg",
-                Quality = parserSettings.ContainsKey("-quality") ? parserSettings["-quality"] : "100",
-                DestinationPath = parserSettings.ContainsKey("-destination") ? parserSettings["-destination"] : GetAssemblyPath()
+                ConvertInto = parserSettings.ContainsKey(CmdLineParams.ConvertInto) ? parserSettings[CmdLineParams.ConvertInto] : ".jpeg",
+                Quality = parserSettings.ContainsKey(CmdLineParams.Quality) ? parserSettings[CmdLineParams.Quality] : "100",
+                DestinationPath = parserSettings.ContainsKey(CmdLineParams.DestinationPath) ? parserSettings[CmdLineParams.DestinationPath] : GetAssemblyPath()
             };
 
             return settings;
@@ -67,13 +69,15 @@ namespace ConvertImage.Factory
 
         private static string GetFilePath(Dictionary<string, string> parserSettings)
         {
-            return parserSettings.ContainsKey("-path") ? parserSettings["-path"] : GetAssemblyPath();
+            return parserSettings.ContainsKey(CmdLineParams.FilePath) ? parserSettings[CmdLineParams.FilePath] : GetAssemblyPath();
         }
 
         private static string GetAssemblyPath()
         {
             return System.Reflection.Assembly.GetEntryAssembly().Location.Replace("ConvertImage.exe", "");
         }
+
+        #endregion
 
     }
 }
