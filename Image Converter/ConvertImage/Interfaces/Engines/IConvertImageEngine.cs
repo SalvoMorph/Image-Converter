@@ -6,7 +6,7 @@ namespace ConvertImage.Interfaces.Engines
     /// <summary>
     /// The ConvertImage Engine.
     /// </summary>
-    public interface IConvertImageEngine
+    internal interface IConvertImageEngine
     {
         /// <summary>
         /// Convert the images.

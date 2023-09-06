@@ -6,7 +6,7 @@ namespace ConvertImage.Interfaces.Logger
     /// <summary>
     /// The Logger.
     /// </summary>
-    internal interface ILogger
+    public interface ILogger
     {
         /// <summary>
         /// Log the message in the console.

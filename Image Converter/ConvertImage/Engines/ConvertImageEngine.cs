@@ -13,7 +13,7 @@ using static ConvertImage.Models.ConvertImageConstants;
 namespace ConvertImage.Engines
 {
     /// <inheritdoc cref="IConvertImageEngine"/>
-    class ConvertImageEngine : IConvertImageEngine
+    internal class ConvertImageEngine : IConvertImageEngine
     {
         private readonly ILogger _logger;
 
