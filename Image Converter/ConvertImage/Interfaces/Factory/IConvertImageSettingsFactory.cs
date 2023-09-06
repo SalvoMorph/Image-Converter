@@ -15,4 +15,3 @@ namespace ConvertImage.Interfaces.Factory
         ConvertImageSettings CreateSettings(string[] options);
     }
 }
-

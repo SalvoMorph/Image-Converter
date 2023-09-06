@@ -1,8 +1,11 @@
-﻿using ConvertImage.Interfaces.Factory;
+﻿using ConvertImage.Helpers;
+using ConvertImage.Interfaces.Factory;
+using ConvertImage.Interfaces.Logger;
 using ConvertImage.Logging;
 using ConvertImage.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static ConvertImage.Models.ConvertImageConstants;
 
 namespace ConvertImage.Factory
@@ -16,10 +19,9 @@ namespace ConvertImage.Factory
         /// Ctor of <see cref="ConvertImageSettingsFactory"/>.
         /// </summary>
         /// <param name="logger">The Logger Interface.</param>
-        /// <exception cref="ArgumentNullException"></exception>
         public ConvertImageSettingsFactory(ILogger logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger ?? new ConsoleLogger();
         }
 
         /// <inheritdoc cref="IConvertImageSettingsFactory.CreateSettings(string[])"/>
@@ -31,21 +33,12 @@ namespace ConvertImage.Factory
                 throw new ArgumentException("Invalid options");
             }
 
-            Dictionary<string, string> parserSettings = new();
+            CheckHelp(options);
 
-            foreach (var option in options)
-            {
-                var split = option.Split('=');
-
-                if (split[0].ToUpper().Contains(CmdLineParams.Help))
-                {
-                    _logger.ShowHelpMenu();
-                    Environment.Exit(0);
-                }
-
-                parserSettings.Add(split[0], split[1]);
-                _logger.Log(LogLevel.Info, $"Setting {split[0]}:{split[1]}");
-            }
+            var parserSettings = options
+                .Select(option => option.Split('='))
+                .Select(split => new { Key = split[0], Value = split[1] })
+                .ToDictionary(p => p.Key, p => p.Value);
 
             return InitSettings(parserSettings);
         }
@@ -77,8 +70,16 @@ namespace ConvertImage.Factory
             return System.Reflection.Assembly.GetEntryAssembly().Location.Replace("ConvertImage.exe", "");
         }
 
+        private void CheckHelp(string[] options)
+        {
+            if (options.Any(option => option.ToUpper().Contains(CmdLineParams.Help)))
+            {
+                _logger.ShowHelpMenu();
+                ConsoleLoggerHelper.PressKeyToExit();
+            }
+        }
+
         #endregion
 
     }
 }
-

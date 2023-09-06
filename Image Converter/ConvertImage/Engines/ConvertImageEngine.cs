@@ -1,4 +1,5 @@
 ﻿using ConvertImage.Interfaces.Engines;
+using ConvertImage.Interfaces.Logger;
 using ConvertImage.Logging;
 using ConvertImage.Models;
 using System;
@@ -20,10 +21,9 @@ namespace ConvertImage.Engines
         /// Ctor of <see cref="ConvertImageEngine"/>.
         /// </summary>
         /// <param name="logger">The Logger Interface.</param>
-        /// <exception cref="ArgumentNullException"></exception>
         public ConvertImageEngine(ILogger logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger ?? new ConsoleLogger();
         }
 
         /// <inheritdoc cref="IConvertImageEngine.ConvertImages(ConvertImageSettings)"/>

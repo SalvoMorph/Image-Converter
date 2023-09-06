@@ -1,4 +1,6 @@
-﻿namespace ConvertImage.Models
+﻿using System;
+
+namespace ConvertImage.Models
 {
     /// <summary>
     /// The ConvertImage Constants.
@@ -12,7 +14,8 @@
         {
             Info,
             Warning,
-            Error
+            Error,
+            None
         }
 
         /// <summary>
@@ -27,6 +30,31 @@
             public const string DestinationPath = "-destination";
             public const string Help = "HELP";
         }
+
+        /// <summary>
+        /// The Colors to use in the console.
+        /// </summary>
+        public class ConsoleLoggerColor
+        {
+            /// <summary>
+            /// Dark Green to use to log Info.
+            /// </summary>
+            public const ConsoleColor Info = ConsoleColor.DarkGreen;
+
+            /// <summary>
+            /// Yellow to use to log Info.
+            /// </summary>
+            public const ConsoleColor Warning = ConsoleColor.Yellow;
+
+            /// <summary>
+            /// Red to use to log Info.
+            /// </summary>
+            public const ConsoleColor Error = ConsoleColor.Red;
+
+            /// <summary>
+            /// White for tdefault.
+            /// </summary>
+            public const ConsoleColor Default = ConsoleColor.White;
+        }
     }
 }
-

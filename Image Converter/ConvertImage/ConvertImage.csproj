@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\Logger\ILogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ConvertImageSettings.cs" />
@@ -55,7 +56,7 @@
     <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Interfaces\Engines\IConvertImageEngine.cs" />
     <Compile Include="Models\ConvertImageConstants.cs" />
-    <Compile Include="Helpers\ConvertImageHelper.cs" />
+    <Compile Include="Helpers\ConsoleLoggerHelper.cs" />
     <Compile Include="Engines\ConvertImageEngine.cs" />
   </ItemGroup>
   <ItemGroup>

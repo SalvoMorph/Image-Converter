@@ -1,53 +1,28 @@
 ﻿using ConvertImage.Helpers;
+using ConvertImage.Interfaces.Logger;
 using System;
 using System.Text;
 using static ConvertImage.Models.ConvertImageConstants;
 
 namespace ConvertImage.Logging
 {
-    /// <summary>
-    /// The Logger.
-    /// </summary>
-    public interface ILogger
-    {
-        /// <summary>
-        /// Log the message in the console.
-        /// </summary>
-        /// <param name="level">The <see cref="LogLevel"/>.</param>
-        /// <param name="message">The message.</param>
-        void Log(LogLevel level, string message);
-
-        /// <summary>
-        /// Show the Help Menu.
-        /// </summary>
-        void ShowHelpMenu();
-
-        /// <summary>
-        /// Print an error for the mandatory parameter.
-        /// </summary>
-        /// <param name="parameter"></param>
-        void ShowMandatoryParameterError(string parameter);
-    }
-
     /// <inheritdoc cref="ILogger"/>
     public class ConsoleLogger : ILogger
     {
         private static readonly object _lockObject = new();
-        private readonly ConsoleColor _infoColor = ConsoleColor.DarkGreen;
-        private readonly ConsoleColor _warningColor = ConsoleColor.Yellow;
-        private readonly ConsoleColor _errorColor = ConsoleColor.Red;
 
+        /// <inheritdoc cref="ILogger.Log(LogLevel, string)"/>
         public void Log(LogLevel level, string message)
         {
             lock (_lockObject)
             {
                 Console.ForegroundColor = GetColorForLogLevel(level);
-                Console.WriteLine($"[{level}] {message}");
+                Console.WriteLine($"{PrintLevel(level)} {message}");
                 Console.ResetColor();
 
                 if (level == LogLevel.Error)
                 {
-                    ConvertImageHelper.PressKeyToExit();
+                    ConsoleLoggerHelper.PressKeyToExit();
                     Environment.Exit(1);
                 }
             }
@@ -63,8 +38,7 @@ namespace ConvertImage.Logging
         /// <inheritdoc cref="ILogger.ShowHelpMenu()"/>
         public void ShowHelpMenu()
         {
-            var helpMenu = GetHelpMenuText();
-            Console.WriteLine(helpMenu);
+            Log(LogLevel.None, GetHelpMenuText());
         }
 
         #region Private Methods
@@ -73,13 +47,17 @@ namespace ConvertImage.Logging
         {
             return level switch
             {
-                LogLevel.Info => _infoColor,
-                LogLevel.Warning => _warningColor,
-                LogLevel.Error => _errorColor,
-                _ => ConsoleColor.White,
+                LogLevel.Info => ConsoleLoggerColor.Info,
+                LogLevel.Warning => ConsoleLoggerColor.Warning,
+                LogLevel.Error => ConsoleLoggerColor.Error,
+                _ => ConsoleLoggerColor.Default,
             };
         }
 
+        private static string PrintLevel(LogLevel level)
+        {
+            return (level == LogLevel.None) ? string.Empty : $"[{level}]";
+        }
 
         private string GetHelpMenuText()
         {
