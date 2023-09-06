@@ -5,4 +5,4 @@ Image Converter/.vs/ConvertImage/v17/.suo
 *.pdb
 Image Converter/ConvertImage/obj/Debug/ConvertImage.csproj.AssemblyReference.cache
 Image Converter/ConvertImage/obj/Debug/ConvertImage.csproj.FileListAbsolute.txt
-*.pdb
+Image Converter/ConvertImage/bin/Debug
